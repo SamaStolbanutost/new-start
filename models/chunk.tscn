@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/noise.gd" type="Script" id=1]
+[ext_resource path="res://models/tree.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/background/background0000.png" type="Texture" id=3]
+
+[sub_resource type="NoiseTexture" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 200, 200 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 209.006, 20 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 209.253, 20 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 20, 205.668 )
+
+[node name="chunk" type="Sprite" groups=[
+"chunk",
+]]
+position = Vector2( -6.72717, 6.72717 )
+texture = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="main" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="main"]
+shape = SubResource( 2 )
+
+[node name="down" type="Area2D" parent="."]
+position = Vector2( 0, 233 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="down"]
+shape = SubResource( 3 )
+
+[node name="up" type="Area2D" parent="."]
+position = Vector2( 0, -233 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="up"]
+shape = SubResource( 4 )
+
+[node name="right" type="Area2D" parent="."]
+position = Vector2( 233, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right"]
+shape = SubResource( 5 )
+
+[node name="left" type="Area2D" parent="."]
+position = Vector2( -233, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left"]
+shape = SubResource( 5 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 6, 0 )
+z_index = 2
+
+[node name="StaticBody2D" parent="Node2D" instance=ExtResource( 2 )]
+position = Vector2( 227, -198 )
+
+[node name="StaticBody2D4" parent="Node2D" instance=ExtResource( 2 )]
+position = Vector2( -240, -198 )
+
+[node name="StaticBody2D2" parent="Node2D" instance=ExtResource( 2 )]
+position = Vector2( 227, 257 )
+
+[node name="StaticBody2D3" parent="Node2D" instance=ExtResource( 2 )]
+position = Vector2( -240, 257 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 8, 8 )
+texture = ExtResource( 3 )
+
+[connection signal="body_entered" from="main" to="." method="player_back"]
+[connection signal="body_exited" from="main" to="." method="player_exited_main"]
+[connection signal="body_entered" from="down" to="." method="player_went_down"]
+[connection signal="body_exited" from="down" to="." method="player_exited"]
+[connection signal="body_entered" from="up" to="." method="player_went_up"]
+[connection signal="body_exited" from="up" to="." method="player_exited"]
+[connection signal="body_entered" from="right" to="." method="player_went_right"]
+[connection signal="body_exited" from="right" to="." method="player_exited"]
+[connection signal="body_entered" from="left" to="." method="player_went_left"]
+[connection signal="body_exited" from="left" to="." method="player_exited"]

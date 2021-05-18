@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/shadow/shadow0001.png" type="Texture" id=1]
+[ext_resource path="res://sprites/shadow/shadow0000.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "shadow",
+"speed": 1.0
+} ]
+
+[node name="AnimatedSprite" type="AnimatedSprite"]
+scale = Vector2( 8, 8 )
+frames = SubResource( 1 )
+animation = "shadow"
+playing = true
